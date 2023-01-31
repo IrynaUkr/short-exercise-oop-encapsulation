@@ -31,8 +31,7 @@ public class WeatherReporter {
     }
 
     private double convertToFahrenheit() {
-        double newTemp = (9.0 / 5.0) * temperature + 32;
-        return newTemp;
+        return (9.0 / 5.0) * temperature + 32;
     }
 
     public String checkLocation() {
