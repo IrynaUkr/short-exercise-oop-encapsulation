@@ -1,52 +1,68 @@
 package com.techreturners.encapsulation.bankaccount.model;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 public class WeatherReporter {
 
-    public String location;
-    public double temperature;
+    public static final String LONDON = "London";
+    public static final String CALIFORNIA = "California";
+    public static final String CAPE_TOWN = "Cape Town";
+    public static final int HEAT = 30;
+    public static final int COLD = 10;
+    public static final String LONDON_PICTURE = "🌦";
+    public static final String CALIFORNIA_PICTURE = "🌅";
+    public static final String CAPE_TOWN_PICTURE = "🌤";
+    public static final String LOCATION_PICTURE = "🔆";
+    public static final String IT_S_TOO_HOT = "It's too hot 🥵!";
+    public static final String IT_S_TOO_COLD = "It's too cold 🥶!";
+    public static final String IT_S_JUST_RIGHT = "Ahhh...it's just right 😊!";
+    private final String location;
+    private final double temperature;
 
     public WeatherReporter(String location, double temperature) {
         this.location = location;
         this.temperature = temperature;
     }
 
-    public String print() {
+    public String printWeatherReport() {
+        double newTemp = convertToFahrenheit();
+        return MessageFormat.format("I am in {0} and it is {1}. {2}. The temperature in Fahrenheit is {3}.", location, checkLocation(), checkTemperature(), newTemp);
+    }
 
+    private double convertToFahrenheit() {
         double newTemp = (9.0 / 5.0) * temperature + 32;
-        return MessageFormat.format("I am in {0} and it is {1}. {2}. The temperature in Fahrenheit is {3}.", location, check1(), check2(), newTemp);
-
+        return newTemp;
     }
 
-    public String check1() {
-        if (location == "London") {
+    public String checkLocation() {
+        if (Objects.equals(location, LONDON)) {
 
-            return "🌦";
+            return LONDON_PICTURE;
 
-        } else if (location == "California") {
+        } else if (Objects.equals(location, CALIFORNIA)) {
 
-            return "🌅";
+            return CALIFORNIA_PICTURE;
 
-        } else if (location == "Cape Town") {
+        } else if (Objects.equals(location, CAPE_TOWN)) {
 
-            return "🌤";
+            return CAPE_TOWN_PICTURE;
 
         }
-        return "🔆";
+        return LOCATION_PICTURE;
     }
 
-    public String check2() {
-        if (temperature > 30) {
+    public String checkTemperature() {
+        if (temperature > HEAT) {
 
-            return "It's too hot 🥵!";
+            return IT_S_TOO_HOT;
 
-        } else if (temperature < 10) {
+        } else if (temperature < COLD) {
 
-            return "It's too cold 🥶!";
+            return IT_S_TOO_COLD;
 
         }
-        return "Ahhh...it's just right 😊!";
+        return IT_S_JUST_RIGHT;
     }
 
 }
